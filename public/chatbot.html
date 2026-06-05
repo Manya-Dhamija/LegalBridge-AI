@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+  <a href="/">Dashboard</a>
+  <a href="/chatbot.html">Legal Assistant</a>
+</nav>
+
+<div class="container">
+
+<h2>Legal Assistant</h2>
+
+<textarea
+id="question"
+rows="5"
+placeholder="Ask your legal question">
+</textarea>
+
+<br><br>
+
+<button onclick="ask()">
+Ask
+</button>
+
+<div class="card" id="answer"></div>
+
+</div>
+
+<script>
+async function ask() {
+
+const question =
+document.getElementById("question").value;
+
+const res =
+await fetch("/api/chat", {
+method: "POST",
+headers: {
+"Content-Type":"application/json"
+},
+body: JSON.stringify({question})
+});
+
+const data =
+await res.json();
+
+document.getElementById(
+"answer"
+).innerText = data.answer;
+}
+</script>
+
+</body>
+</html>

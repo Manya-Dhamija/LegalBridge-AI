@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+<a href="/">Dashboard</a>
+</nav>
+
+<div class="container">
+
+<h2>Create Case</h2>
+
+<input
+id="title"
+placeholder="Case Title">
+
+<button onclick="addCase()">
+Create
+</button>
+
+<div id="list"></div>
+
+</div>
+
+<script>
+
+async function addCase() {
+
+const title =
+document.getElementById("title").value;
+
+await fetch("/api/cases", {
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body: JSON.stringify({
+title
+})
+});
+
+loadCases();
+}
+
+async function loadCases() {
+
+const res =
+await fetch("/api/cases");
+
+const cases =
+await res.json();
+
+let html = "";
+
+cases.forEach(c => {
+html += `
+<div class="card">
+${c.title}
+</div>
+`;
+});
+
+document.getElementById(
+"list"
+).innerHTML = html;
+}
+
+loadCases();
+
+</script>
+
+</body>
+</html>

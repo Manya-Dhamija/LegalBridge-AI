@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+<a href="/">Dashboard</a>
+</nav>
+
+<div class="container">
+
+<h2>Upload Document</h2>
+
+<form
+action="/upload"
+method="POST"
+enctype="multipart/form-data">
+
+<input
+type="file"
+name="document">
+
+<br><br>
+
+<button type="submit">
+Upload
+</button>
+
+</form>
+
+</div>
+
+</body>
+</html>
